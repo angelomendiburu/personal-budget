@@ -58,12 +58,21 @@ function actualizarInterfaz() {
     listaTransacciones.innerHTML = '';
     for (let transaccion of transacciones) {
         const li = document.createElement('li');
-        li.textContent = transaccion > 0 
-            ? `Ingreso: +$${transaccion}` 
-            : `Gasto: -$${Math.abs(transaccion)}`;
+        
+        // Añadir clase según el tipo de transacción
+        if (transaccion > 0) {
+            li.textContent = `Ingreso: +$${transaccion}`;
+            li.classList.add('ingreso');  // Clase para ingresos (verde)
+        } else {
+            li.textContent = `Gasto: -$${Math.abs(transaccion)}`;
+            li.classList.add('gasto');  // Clase para gastos (rojo)
+        }
+
+        // Añadir la transacción a la lista
         listaTransacciones.appendChild(li);
     }
 }
+
 
 // Manejar el evento submit del formulario
 formulario.addEventListener('submit', function(evento) {
